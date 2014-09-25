@@ -30,7 +30,7 @@ class Game
 
   def play
     printer.game_intro
-    puts secret_sequence
+#    puts secret_sequence
     until win? || exit? || max_turns_reached?
       printer.turn_indicator(turns)
       printer.game_command_request
