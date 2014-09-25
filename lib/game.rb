@@ -87,6 +87,7 @@ class Game
 
   def win?
     guess == secret_sequence
+#    @timer = Time.now - @start_time
   end
 
   def exit?
