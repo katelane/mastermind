@@ -1,3 +1,4 @@
+require './lib/game'
 class MessagePrinter
   def intro
     puts "Welcome to Mastermind."
@@ -60,8 +61,11 @@ class MessagePrinter
     program_instructions
   end
 
-  def game_win(secret_sequence, turns)
-    puts "Congratulations! You guessed the sequence #{secret_sequence} in #{turns} guesses." #in {timer}."
+  def game_win(secret_sequence, turns, start_time)
+    game_length = (Time.now - start_time).to_i
+    minutes = game_length / 60
+    seconds = game_length % 60
+    puts "Congratulations! You guessed the sequence #{secret_sequence} in #{turns} guesses in #{minutes} minutes and #{seconds} seconds."
     puts "Do you want to (p)lay again or (q)uit?"
   end
 

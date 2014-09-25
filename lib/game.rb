@@ -3,7 +3,8 @@ class Game
               :turns,         # => :turns
               :printer,       # => :printer
               :command,       # => :command
-              :guess_checker  # => nil
+              :guess_checker,
+              :start_time
 
   def initialize(printer = MessagePrinter.new)
     @guess         = 0
@@ -49,7 +50,7 @@ class Game
 #    puts store_history
     case
     when not_four?
-        printer.not_four
+      printer.not_four
     when not_a_valid_letter?
       printer.not_a_valid_letter
     when nice_try?
@@ -57,7 +58,7 @@ class Game
       add_turn
     end
     printer.max_turns_reached(secret_sequence) if max_turns_reached?
-    printer.game_win(secret_sequence, turns) if win?
+    printer.game_win(secret_sequence, turns, start_time) if win?
   end
 
 #  def store_history
@@ -68,6 +69,10 @@ class Game
   def add_turn
     @turns += 1
   end
+
+  # def game_time
+  #   @gametime = @endtime - @start_time
+  # end
 
   def max_turns_reached?
     @turns == 10
@@ -87,7 +92,10 @@ class Game
 
   def win?
     guess == secret_sequence
-#    @timer = Time.now - @start_time
+  end
+
+  def game_length
+    @game_length = @endtime - @start_time
   end
 
   def exit?
